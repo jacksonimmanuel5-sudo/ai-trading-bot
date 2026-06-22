@@ -1,0 +1,19 @@
+from fastapi import FastAPI
+import threading
+import time
+
+app = FastAPI()
+
+def bot_loop():
+    while True:
+        print("AI Trading Bot Running...")
+        time.sleep(5)
+
+@app.get("/")
+def home():
+    return {"status": "AI Trading Bot Live"}
+
+@app.on_event("startup")
+def start():
+    thread = threading.Thread(target=bot_loop)
+    thread.start()
